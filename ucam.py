@@ -14,7 +14,8 @@ class UCam(object):
     """
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/tty.usbserial-AI03CNY6', baudrate=921600, timeout=.01)
+        # change serial device name to yours 
+        self.ser = serial.Serial('/dev/tty.usbserial-xxxxxxxxxx', baudrate=921600, timeout=.01)
         self.synced = False
         print("initialized!")
 
