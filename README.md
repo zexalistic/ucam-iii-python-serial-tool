@@ -20,7 +20,7 @@ in japan, we can get at switchscience
 
 You have to use `pyserial`, `binascii`, `struct` packages.
 
-Install those if you don't installed yet before run script.
+Install those if you don't installed yet before running script.
 
 
 And you have to write serial device name in `ucam.py` code. 
@@ -28,4 +28,4 @@ And you have to write serial device name in `ucam.py` code.
 
 
 And run script, `$ python main.py`.
-After run the script, test.jpg is output if taking picture succeeded.
+After run the script, test.jpg is outputted if taking picture succeeded.
