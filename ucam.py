@@ -6,6 +6,7 @@ import re
 from binascii import hexlify, unhexlify
 from struct import pack, unpack
 import math
+import codecs
 
 class UCam(object):
     """
@@ -20,7 +21,7 @@ class UCam(object):
         print("initialized!")
 
     def sync(self):
-        num_tries = 100      # 60 times is enough by the documents
+        num_tries = 60      # 60 times is enough by the documents
         while num_tries > 0:
             if self._sync():
                 return True
@@ -88,7 +89,11 @@ class UCam(object):
 
         print("hexlify(data) is: ", hexlify(data))
 
-        img_size = unpack('<I',(unhexlify(hexlify(data[-3:])).decode() + '\x00').encode())[0]
+        print("data is", data)
+        print("data[-3:] is ", data[-3:])
+
+        # below line is too redundant... to avoid "UnicodeDecodeError: 'utf-8' codec can't decode byte 0x9a in position 0: invalid start byte"
+        img_size = unpack('<I', (codecs.decode(codecs.encode(unhexlify(hexlify(data[-3:])), 'hex'), 'hex') + b'\x00'))[0]
 
 
         print("image size is {}".format(img_size))
