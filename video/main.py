@@ -20,6 +20,9 @@ if synced:
 
     cam._initial()
     time.sleep(.2)
-    for i in range(10):
+    start = time.time()
+    for i in range(20):
         name = 'image_' + str(i) + '.png'
         cam.take_picture(name)
+    end = time.time()
+    print(end-start)
