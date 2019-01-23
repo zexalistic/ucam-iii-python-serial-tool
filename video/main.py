@@ -19,6 +19,7 @@ if synced:
     os.chdir(path)
 
     cam._initial()
+    time.sleep(.2)
     for i in range(10):
         name = 'image_' + str(i) + '.png'
         cam.take_picture(name)

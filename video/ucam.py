@@ -69,23 +69,12 @@ class UCam(object):
                 cur += 1
         return bytearr
 
-    def _set_pkg_size(self):
-        # set package size 512 bytes
-        self._write(commands.set_pkg_size('00', '02'))
-        assert self._matches(commands.ack('06', '..'), self._wait_for_bytes(6))
-
-    def _snapshot(self):
-        self._write(commands.snapshot('01', '00', '00'))
-        read = self._wait_for_bytes(6)
-        assert self._matches(commands.ack('05', '..'), read)
-        #assert self._matches(commands.ack('05', '..'), self._wait_for_bytes(6))
-
     def _get_picture(self):
         """
         sends the GET PICTURE command and receives the corresponding DATA command.
         Returns the number of packets to be read.
         """
-        time.sleep(.2)
+        #time.sleep(.2)
         #self._write(commands.get_picture('01'))
         self._write(commands.get_picture('02'))
         assert self._matches(commands.ack('04', '..'), self._wait_for_bytes(6))
@@ -116,14 +105,8 @@ class UCam(object):
         print("taken picture, finish!")
 
     def take_picture(self, name):
-        # initialize for GREY, RAW
-        #self._initial()
-        
-        # compresed snapshot pic
-        #self._snapshot()
-
-        # get picture (snapshot)
-        num_pkgs = self._get_picture()
+        # get picture 
+        self._get_picture()
 
         # receive img data pkgs
         self._write_picture(name)
