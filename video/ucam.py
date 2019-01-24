@@ -69,12 +69,16 @@ class UCam(object):
                 cur += 1
         return bytearr
 
+    def _set_baudrate(self, first_divider, second_divider):
+        self._write(commands.set_baudrate('01','00'))
+        assert self._matches(commands.ack('07', '..'), self._wait_for_bytes(6))
+        
+
     def _get_picture(self):
         """
         sends the GET PICTURE command and receives the corresponding DATA command.
         Returns the number of packets to be read.
         """
-        #time.sleep(.2)
         #self._write(commands.get_picture('01'))
         self._write(commands.get_picture('02'))
         assert self._matches(commands.ack('04', '..'), self._wait_for_bytes(6))

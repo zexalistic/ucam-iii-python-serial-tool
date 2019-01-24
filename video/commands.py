@@ -7,6 +7,7 @@ GET_PICTURE_ID = 'aa04'
 SNAPSHOT_ID = 'aa05'
 DATA_ID = 'aa0a'
 SET_PKG_SIZE_ID = 'aa06'
+SET_BAUDRATE = 'aa07'
 RESET_ID = 'aa08'
 
 def sync():
@@ -17,6 +18,9 @@ def initial(img_format, raw_res, jpeg_res):
 
 def data(data_type, len1, len2, len3):
     return _build(DATA_ID, data_type, len1, len2, len3)
+
+def set_baudrate(first_divider, second_divider):
+    return _build(SET_BAUDRATE, first_divider, second_divider,'00','00')
 
 def set_pkg_size(pkg_size_lo, pkg_size_hi):
     return _build(SET_PKG_SIZE_ID, '08', pkg_size_lo, pkg_size_hi, '00')
