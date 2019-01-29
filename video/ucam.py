@@ -1,5 +1,3 @@
-# coding:utf-8
-
 import serial, commands
 import time
 import re
@@ -79,13 +77,11 @@ class UCam(object):
         sends the GET PICTURE command and receives the corresponding DATA command.
         Returns the number of packets to be read.
         """
-        #self._write(commands.get_picture('01'))
         self._write(commands.get_picture('02'))
         assert self._matches(commands.ack('04', '..'), self._wait_for_bytes(6))
         # receive DATA
         data = self._wait_for_bytes(6)
         print("data is ", data)
-        #assert self._matches(commands.data('01', '..', '..', '..'), data)
         assert self._matches(commands.data('02', '..', '..', '..'), data)
 
         print("hexlify(data) is: ", hexlify(data))
